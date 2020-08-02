@@ -1,12 +1,12 @@
 # check for admin rights or get it
 param([switch]$Elevated)
-function Check-Admin 
+function CheckAdminRights
     {
         $currentUser = New-Object Security.Principal.WindowsPrincipal $([Security.Principal.WindowsIdentity]::GetCurrent())
         $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
     }
 
-if ((Check-Admin) -eq $false)  
+if ((CheckAdminRights) -eq $false)  
 {
     if ($elevated)  
     {
