@@ -18,4 +18,3 @@ Write-Host "##########################" -foreground Green
 
 # don't exit
 $host.enternestedprompt()
-
