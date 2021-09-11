@@ -28,7 +28,7 @@ Function Hugo-Create {
 
 Function Change-Hugo {
     Write-Host "changing work directory to" $hugopublic
-    cd $hugopublic
+    Set-Location -Path $hugopublic
 }
 
 Function Git-Add {
@@ -37,7 +37,7 @@ Function Git-Add {
 }
 
 Function Git-Commit {
-    Write-Host "git add in folder" $hugopublic
+    Write-Host "git commit in folder" $hugopublic
     git commit -m "update"
 }
 
