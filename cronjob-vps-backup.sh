@@ -5,7 +5,6 @@ dockerpath="/home/mu/docker"
 log="/home/mu/docker/_scripts/logfile.txt"
 backup_path="/home/mu/docker"
 backup_dest="/home/mu/docker/_backup"
-previous_backup=$(ls -1t "$backup_dest"/"$backup_file"*.tgz | tail -n 1)
 
 # Find all directories containing a docker-compose.yml file, excluding 'docker-old' and stop them
 dirs=$(find $dockerpath -maxdepth 1 -type d ! -name "docker-old" -exec test -e "{}/docker-compose.yml" ';' -print)
@@ -22,13 +21,14 @@ if [ ! -d "$backup_dest" ]; then
   exit 1
 fi
 
-# Delete the previously created tar file
+# Delete the previously created tgz file
+previous_backup=$(ls -1t "$backup_dest"/*.tgz | tail -n 1)
 if [ -f "$previous_backup" ]; then
   echo "Deleting previous backup file: $previous_backup"
   rm "$previous_backup"
 fi
 
-# Set archive-name
+# Set archive filename
 day=$(date +%d-%m-%y)
 hostname=$(hostname -s)
 backup_file="$hostname-$day.tgz"
